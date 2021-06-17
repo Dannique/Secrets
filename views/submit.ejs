@@ -1,0 +1,37 @@
+<%- include('partials/header') %>
+
+<body>
+
+  <div class="secrets-container">
+    <div class="container ">
+      <div class=" center">
+        <i class="fas fa-key fa-4x"></i>
+        <h2 class="display-3 submit-h2">Secrets</h2>
+        <p class="submit-p">Don't keep your secrets, share them anonymously!</p>
+
+        <form action="/submit" method="POST">
+
+          <div class="form-group">
+            <input type="text" class="form-control text-center" name="secret" placeholder="What's your secret?">
+          </div>
+          <button type="submit" class="btn btn-lg sign-btn">Submit</button>
+        </form>
+        <% if(secrets.length != 0){ %>
+        <hr>
+        <h2 class="display-3 submit-h2">Your Secrets</h2>
+        <form action="/submit/delete" method="post">
+          <div class="form-group">
+            <select class="form-control text-center" name="secret">
+              <% secrets.forEach(function(secret){ %>
+              <option value="<%= secret %>"><%= secret %></option>
+              <% }); %>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-lg sign-btn">Delete Secret</button>
+        </form>
+        <%  } %>
+
+      </div>
+    </div>
+  </div>
+  <%- include('partials/footer') %>

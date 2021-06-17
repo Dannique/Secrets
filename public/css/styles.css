@@ -1,0 +1,175 @@
+html {
+  margin: 0;
+}
+
+body {
+  background-color: rgba(94, 94, 94, 0.7);
+}
+
+body.loginReg {
+  background-image: url('/images/shhh.png');
+  background-repeat: no-repeat;
+  background-position: 97% 40%;
+}
+
+h1 {
+  font-family: Great Vibes;
+  color: rgba(243, 139, 107, 0.78);
+}
+
+h2 {
+  font-family: Amatic SC;
+  font-weight: 700;
+  font-size: 2.8rem;
+  color: rgba(243, 139, 107, 0.78);
+}
+
+p {
+  margin: 0;
+  color: rgba(197, 196, 196, 0.9);
+  font-family: Montserrat;
+  font-weight: 300;
+}
+
+hr {
+  margin: auto;
+  width: 600px;
+
+}
+
+.center {
+  text-align: center;
+}
+
+/******************** HOME PAGE *************************/
+body.home {
+  background-image: url('/images/shhh.png');
+  background-repeat: no-repeat;
+  background-color: rgba(94, 94, 94, 0.2);
+  background-position: 88% 40%;
+  margin: 0;
+}
+
+.small-container {
+  background-color: rgba(15, 15, 15, 0.3);
+  width: 100%;
+  height: 620px;
+  padding: 100px;
+  margin: 0 auto;
+}
+
+.h1-heading {
+  margin: 45px 0 10px;
+  font-size: 7rem;
+}
+
+.p-heading {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+.copyright-home {
+  background-color: rgba(78, 78, 78, 0.57);
+  padding: 7px;
+  font-size: small;
+}
+
+.container-fluid {
+  background-color: rgba(104, 104, 104, 0.39);
+  padding: 68px 0;
+  min-height: 600px;
+}
+
+.centered {
+  text-align: center;
+  background-color: rgba(15, 15, 15, 0.29);
+}
+
+/***********************FORMS***********************/
+.form-control {
+  border: 2px solid rgba(243, 139, 107, 0.78);
+  opacity: 70%;
+}
+
+label {
+  color: rgba(197, 196, 196, 0.9);
+  font-family: 'Montserrat';
+  font-weight: 300;
+}
+
+.card {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
+
+/***************************LOGIN/REGISTER**********************/
+
+.loginReg-container {
+  background-color: rgba(36, 36, 36, 0.43);
+  padding: 68px 0;
+  min-height: 650px;
+  margin: 53px 0;
+}
+
+/*********************BUTTONS**********************/
+
+.sign-btn {
+  border: solid 1.3px rgba(0, 0, 0, 0.5);
+  color: rgba(255, 140, 105, 0.68);
+  margin: 25px 10px;
+  font-family: Montserrat;
+  font-size: 1.1rem;
+  font-weight: 300;
+  padding: 7px;
+}
+
+.sign-btn:hover {
+  border-color: rgba(255, 140, 105, 0.68);
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.btn-reg {
+  margin-bottom: 35px;
+}
+
+/**************SECRETS PAGE*******************/
+.secret-text {
+  margin: 10px 0;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 1.8rem;
+  color: rgba(207, 206, 206, 0.9);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.secret-h2 {
+  margin: 25px 0;
+}
+
+.secrets-container {
+  background-color: rgba(36, 36, 36, 0.43);
+  padding: 30px 0 30px;
+  min-height: 650px;
+  margin: 60px 0 30px;
+}
+
+/********************SUBMIT PAGE********************/
+.submit-p {
+  font-size: 1.3rem;
+  margin: 10px 0 18px;
+}
+
+.submit-h2 {
+  margin: 10px;
+}
+
+/********************OTHER**************/
+.copyright {
+  font-size: small;
+  padding: 7px;
+}
+
+.key {
+  margin-bottom: 50px;
+  opacity: 50%;
+}
