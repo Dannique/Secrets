@@ -1,5 +1,4 @@
 //jshint esversion:6
-
 const express = require('express');
 const mongoose = require('mongoose');
 require('dotenv').config();
@@ -55,11 +54,11 @@ const User = new mongoose.model("User", userSchema);
 // CHANGE: USE "createStrategy" INSTEAD OF "authenticate"
 passport.use(User.createStrategy());
 
-passport.serializeUser(function (user, done) {
+passport.serializeUser((user, done) => {
     done(null, user.id);
 });
 
-passport.deserializeUser(function (id, done) {
+passport.deserializeUser((id, done) => {
     User.findById(id, function (err, user) {
         done(err, user);
     });
@@ -71,7 +70,7 @@ passport.use(new GoogleStrategy({
         callbackURL: "http://localhost:3000/auth/google/secrets",
         userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo"
     },
-    function (accessToken, refreshToken, profile, cb) {
+    (accessToken, refreshToken, profile, cb) => {
         User.findOrCreate({
             googleId: profile.id
         }, function (err, user) {
@@ -85,7 +84,7 @@ passport.use(new FacebookStrategy({
         clientSecret: process.env.FACEBOOK_APP_SECRET,
         callbackURL: "http://localhost:3000/auth/facebook/secrets"
     },
-    function (accessToken, refreshToken, profile, cb) {
+    (accessToken, refreshToken, profile, cb) => {
         User.findOrCreate({
             facebookId: profile.id
         }, function (err, user) {
@@ -94,7 +93,7 @@ passport.use(new FacebookStrategy({
     }
 ));
 
-app.get("/", function (req, res) {
+app.get("/",(req, res) => {
     res.render('home');
 })
 
@@ -108,7 +107,7 @@ app.get("/auth/google/secrets",
     passport.authenticate('google', {
         failureRedirect: "/login"
     }),
-    function (req, res) {
+    (req, res) => {
         // Successful authentication, redirect to secrets.
         res.redirect("/secrets");
     });
@@ -123,19 +122,19 @@ app.get("/auth/facebook/secrets",
     passport.authenticate('facebook', {
         failureRedirect: '/login'
     }),
-    function (req, res) {
+    (req, res) => {
         // Successful authentication, redirect home.
         res.redirect('/secrets');
     })
 
 app.route("/secrets")
-    .get(function (req, res) {
+    .get((req, res) => {
         if (req.isAuthenticated()) {
             User.find({
                 secret: {
                     $ne: null
                 } //not equal to null
-            }, function (err, foundUsers) {
+            }, (err, foundUsers) => {
                 if (err) {
                     console.log(err);
                 } else {
@@ -153,21 +152,21 @@ app.route("/secrets")
 
 
 app.route("/login")
-    .get(function (req, res) {
+    .get((req, res) => {
         res.render('login');
     })
-    .post(function (req, res) {
+    .post((req, res) => {
         const user = new User({
             username: req.body.username,
             password: req.body.password
         });
 
-        req.login(user, function (err) {
+        req.login(user, (err) => {
             passport.authenticate("local", {
                 successRedirect: "/secrets",
                 failureRedirect: "/login",
                 failureFlash: true,
-            })(req, res, function () {
+            })(req, res, () => {
                 res.redirect("/secrets");
             });
 
@@ -175,13 +174,13 @@ app.route("/login")
     })
 
 app.route("/register")
-    .get(function (req, res) {
+    .get((req, res) => {
         res.render('register');
     })
-    .post(function (req, res) {
+    .post((req, res) => {
         User.register({
             username: req.body.username
-        }, req.body.password, function (err, user) {
+        }, req.body.password, (err, user) => {
             if (err) {
                 console.log(err);
                 res.redirect("/register");
@@ -194,7 +193,7 @@ app.route("/register")
     })
 
 app.route("/submit")
-    .get(function (req, res) {
+    .get((req, res) => {
         if (req.isAuthenticated()) {
             User.findById(req.user.id, function (err, foundUser) {
                 if (!err) {
@@ -207,7 +206,7 @@ app.route("/submit")
             res.redirect("/login");
         }
     })
-    .post(function (req, res) {
+    .post((req, res) => {
         if (req.isAuthenticated()) {
             User.findById(req.user.id, function (err, user) {
                 user.secret.push(req.body.secret);
@@ -221,11 +220,11 @@ app.route("/submit")
         }
     })
 
-app.post("/submit/delete", function (req, res) {
+app.post("/submit/delete", (req, res) => {
     if (req.isAuthenticated()) {
-        User.findById(req.user.id, function (err, foundUser) {
+        User.findById(req.user.id, (err, foundUser) => {
             foundUser.secret.splice(foundUser.secret.indexOf(req.body.secret), 1);
-            foundUser.save(function (err) {
+            foundUser.save( (err) => {
                 if (!err) {
                     res.redirect("/secrets");
                 }
@@ -236,11 +235,11 @@ app.post("/submit/delete", function (req, res) {
     }
 })
 
-app.get("/logout", function (req, res) {
+app.get("/logout",(req, res) => {
     req.logout();
     res.redirect('/');
 })
 
-app.listen(3000, function () {
+app.listen(3000, () => {
     console.log("server started on port 3000");
 })
